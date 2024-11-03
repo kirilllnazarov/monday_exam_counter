@@ -1,0 +1,18 @@
+.counterSection,
+.counterSectionMaxValue {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    background-color: rgb(41, 140, 207);
+    border-radius: 10px;
+}
+
+.counterSection {
+    font-size: 44px;
+}
+
+.counterSectionMaxValue {
+    font-size: 60px;
+    color: red;
+}

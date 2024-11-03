@@ -1,0 +1,26 @@
+.buttonSection {
+	height: 100px;
+	padding: 15px;
+	background-color: #6c6363;
+	border: 5px solid rgb(41, 140, 207);
+	border-radius: 10px;
+	display: flex;
+	justify-content: space-around;
+}
+
+.button,
+.disbledButton {
+	width: 100px;
+	color: black;
+	font-size: 25px;
+	background-color: rgb(41, 140, 207);
+
+	border-radius: 10px;
+}
+
+.button {
+	border: none;
+}
+.disbledButton {
+	opacity: 0.3;
+}
