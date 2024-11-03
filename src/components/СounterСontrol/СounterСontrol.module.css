@@ -22,5 +22,6 @@
 	border: none;
 }
 .disbledButton {
+	border: none;
 	opacity: 0.3;
 }
