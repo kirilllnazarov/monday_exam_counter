@@ -1,28 +1,48 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import s from "./Counter.module.css";
 import { MaxValue } from "../maxValue/MaxValue";
 import { Count } from "../count/Count";
-import { СounterСontrol } from "../СounterСontrol/СounterСontrol";
+import { СounterСontrol } from "../counterСontrol/СounterСontrol";
 import { ProgressBar } from "../ProgressBar/ProgressBar";
 
-export const Counter = () => {
-	function getRandomNumber(min: number, max: number) {
-		return Math.floor(Math.random() * (max - min) + min);
-	}
+type CounterType = {
+	startValueFromInput: number
+	maxValueFromInput: number
+};
 
-	const rangeRandomMaxValues = getRandomNumber(3, 10);
-	const startValue = 0;
+export const Counter = ({ startValueFromInput, maxValueFromInput }: CounterType) => {
+	// // data start & max values
+	// const rangeRandomMaxValues = getRandomNumber(3, 10);
+	const startValue = startValueFromInput
+	const maxValue = maxValueFromInput
 
-	const [count, setCount] = useState<number>(startValue);
+	const [count, setCount] = useState<number>(0);
 
-	const ref = useRef<number>(rangeRandomMaxValues);
-	const maxValue = ref.current;
+	useEffect(() => getFromLocalStorage(), []);
+	useEffect(() => addToLocalStorage(), [count]);
 
+	// const ref = useRef<number>(rangeRandomMaxValues);
+	// const maxValue = ref.current;
+
+	// get new conunt value after btn click
 	const incCount = () => (count < maxValue ? setCount(count + 1) : undefined);
 
+	// reset conunt value after btn click
 	const resetCount = () => {
-		ref.current = rangeRandomMaxValues;
+		// ref.current = rangeRandomMaxValues;
 		setCount(startValue);
+	};
+
+	// create local storage
+	const addToLocalStorage = () => {
+		localStorage.setItem("counterValue", JSON.stringify(count));
+	};
+	const getFromLocalStorage = () => {
+		const valueAsString = localStorage.getItem("counterValue");
+		console.log("Value from localStorage:", valueAsString);
+		if (valueAsString) {
+			setCount(JSON.parse(valueAsString));
+		}
 	};
 
 	return (
