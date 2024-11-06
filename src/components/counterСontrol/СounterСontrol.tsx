@@ -15,7 +15,7 @@ export const СounterСontrol = ({ maxValue, count, startValue, incCount, resetC
 			<Button className={count >= maxValue ? s.disbledButton : s.button} onClick={incCount}>
 				Inc
 			</Button>
-			<Button className={count === startValue ? s.disbledButton : s.button} onClick={resetCount}>
+			<Button className={count <= 0 ? s.disbledButton : s.button} onClick={resetCount}>
 				Reset
 			</Button>
 		</div>

@@ -1,25 +1,22 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent } from "react";
 import s from "./Input.module.css";
 
 type InputType = {
-	initialInputValue: (value: number) => void;
+	title: string;
+	value: number;
+	onChangeHandler?: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const Input = ({ initialInputValue }: InputType) => {
-	const [value, setValue] = useState(0);
-
-	useEffect(() => initialInputValue(value), [value]);
-
-	const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-		setValue(JSON.parse(event.currentTarget.value));
-	};
-
+export const Input = ({ title, value, onChangeHandler }: InputType) => {
 	return (
-		<input
-			className={value <= 0 ? s.inputStyleIncorrectValue : ""}
-			type={"number"}
-			value={value}
-			onChange={onChangeHandler}
-		/>
+		<div>
+			<label>{title}</label>
+			<input
+				className={value <= 0 ? s.inputStyleIncorrectValue : ""}
+				type={"number"}
+				value={value}
+				onChange={onChangeHandler}
+			/>
+		</div>
 	);
 };

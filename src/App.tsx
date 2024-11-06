@@ -7,17 +7,20 @@ function App() {
 	const [maxValue, setMaxValue] = useState(0);
 	const [startValue, setStartValue] = useState(0);
 
-	const setMaxValuesToCounter = (max: number) => {setMaxValue(max)};
-	const setStartValuesToCounter = (start: number) => {setStartValue(start)};
+	const setMaxValuesToCounter = (max: number) => {
+		setMaxValue(max);
+	};
+	const setStartValuesToCounter = (start: number) => {
+		setStartValue(start);
+	};
 
-	const getInitialValues = () => {}
 	return (
 		<div className={s.app}>
 			<СounterSettings
 				setMaxValuesToCounter={setMaxValuesToCounter}
 				setStartValuesToCounter={setStartValuesToCounter}
 			/>
-			<Counter maxValueFromInput={maxValue} startValueFromInput={startValue}/>
+			<Counter maxValue={maxValue} startValue={startValue} />
 		</div>
 	);
 }

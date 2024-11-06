@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { Button } from "../button/Button";
 import { Input } from "../input/Input";
 import s from "./CounterSettings.module.css";
@@ -8,36 +8,33 @@ type СounterSettingsType = {
 	setStartValuesToCounter: (start: number) => void;
 };
 
-export const СounterSettings = ({ setMaxValuesToCounter, setStartValuesToCounter }: СounterSettingsType) => {
+export const СounterSettings = ({setMaxValuesToCounter, setStartValuesToCounter}: СounterSettingsType) => {
 	const [maxValue, setMaxValue] = useState(0);
-	const [startValue, setStertValue] = useState(0);
+	const [startValue, setStartValue] = useState(0);
 
-	const getMaxValueFromInput = (value: number) => {
-		setMaxValue(value);
+	const getMaxValueFromInput = (event: ChangeEvent<HTMLInputElement>) => {
+		setMaxValue(JSON.parse(event.currentTarget.value));
 	};
 
-	const getStartValueFromInput = (value: number) => {
-		setStertValue(value);
+	const getStartValueFromInput = (event: ChangeEvent<HTMLInputElement>) => {
+		setStartValue(JSON.parse(event.currentTarget.value));
 	};
 
-	const oncClickHandler = () => {
-        setMaxValuesToCounter(maxValue)
-        setStartValuesToCounter(startValue)
+	const onClickHandler = () => {
+		setMaxValuesToCounter(maxValue);
+		setStartValuesToCounter(startValue);
+		setMaxValue(0);
+		setStartValue(0);
 	};
 
 	return (
 		<div className={s.container}>
 			<div className={s.selectValue}>
-				<div>
-					Max value: <Input initialInputValue={getMaxValueFromInput} />
-				</div>
-				<div>
-					Start value: <Input initialInputValue={getStartValueFromInput} />
-				</div>
+				<Input value={maxValue} title={"Max value:"} onChangeHandler={getMaxValueFromInput} />
+				<Input value={startValue} title={"Start value:"} onChangeHandler={getStartValueFromInput} />
 			</div>
-
 			<div className={s.setControl}>
-				<Button className={maxValue <= 0 || startValue <= 0 ? s.disbledButton : s.button} onClick={oncClickHandler}>
+				<Button className={maxValue <= 0 || startValue <= 0 ? s.disbledButton : s.button} onClick={onClickHandler}>
 					Set
 				</Button>
 			</div>
